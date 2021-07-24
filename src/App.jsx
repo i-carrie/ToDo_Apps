@@ -4,37 +4,31 @@ import "./styles.css";
 export const App = () => {
   return (
     <>
-      <div>
+      <div className="input-area">
         <input placeholder="Create New ToDo" />
         <button>Add</button>
       </div>
-      <div>
-        <p>Work In Progress</p>
+      <div className="incomplete-area">
+        <p className="title">Work In Progress</p>
         <ul>
-          <div>
+          <div className="list-row">
             <li>abcd</li>
             <button>Done</button>
             <button>Delete</button>
           </div>
-          <div>
+          <div className="list-row">
             <li>xyz</li>
             <button>Done</button>
             <button>Delete</button>
           </div>
         </ul>
       </div>
-      <div>
-        <p>Done - Closed Items</p>
+      <div className="completed-area">
+        <p className="title">Done - Closed Items</p>
         <ul>
-          <div>
+          <div className="list-row">
             <li>abcd</li>
-            <button>Done</button>
-            <button>Delete</button>
-          </div>
-          <div>
-            <li>xyz</li>
-            <button>Done</button>
-            <button>Delete</button>
+            <button>Retrieve</button>
           </div>
         </ul>
       </div>
