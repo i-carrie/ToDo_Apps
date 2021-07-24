@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./styles.css";
 
 export const App = () => {
-  const [incompleteTodos, setIncompleteTodos] = useState(["abcd", "xyz"]);
-  const [completeTodos, setCompleteTodos] = useState(["zzz"]);
+  const [incompleteTodos, setIncompleteTodos] = useState([]);
+  const [completeTodos, setCompleteTodos] = useState([]);
   const [todoText, setTodoText] = useState("");
 
   const onChangeTodoText = (event) => setTodoText(event.target.value);
@@ -16,7 +16,27 @@ export const App = () => {
   };
 
   const onClickDelete = (index) => {
-    alert(index);
+    const newTodos = [...incompleteTodos];
+    newTodos.splice(index, 1);
+    setIncompleteTodos(newTodos);
+  };
+
+  const onClickDone = (index) => {
+    const newIncomepleteTodos = [...incompleteTodos];
+    newIncomepleteTodos.splice(index, 1);
+
+    const newCompleteTodos = [...completeTodos, incompleteTodos[index]];
+    setIncompleteTodos(newIncomepleteTodos);
+    setCompleteTodos(newCompleteTodos);
+  };
+
+  const onClickBack = (index) => {
+    const newCompleteTodos = [...completeTodos];
+    newCompleteTodos.splice(index, 1);
+
+    const newIncompleteTodos = [...incompleteTodos, completeTodos[index]];
+    setCompleteTodos(newCompleteTodos);
+    setIncompleteTodos(newIncompleteTodos);
   };
 
   return (
@@ -37,7 +57,7 @@ export const App = () => {
               <>
                 <div key={todo} className="list-row">
                   <li>{todo}</li>
-                  <button>Done</button>
+                  <button onClick={() => onClickDone(index)}>Done</button>
                   <button onClick={() => onClickDelete(index)}>Delete</button>
                 </div>
               </>
@@ -48,12 +68,12 @@ export const App = () => {
       <div className="completed-area">
         <p className="title">Done</p>
         <ul>
-          {completeTodos.map((todo) => {
+          {completeTodos.map((todo, index) => {
             return (
               <>
                 <div key={todo} className="list-row">
                   <li>{todo}</li>
-                  <button>Retrieve</button>
+                  <button onClick={() => onClickBack(index)}>Retrieve</button>
                 </div>
               </>
             );
